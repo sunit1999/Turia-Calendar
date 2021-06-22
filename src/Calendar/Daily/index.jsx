@@ -1,5 +1,4 @@
 import React from 'react';
-import { Droppable, Draggable } from 'react-beautiful-dnd';
 import './index.styles.scss';
 import { getElementHeight } from '../util/getElementHeight';
 import Event from './Event';
@@ -190,7 +189,7 @@ export default class Daily extends React.Component {
       return (
         <div key={i} className="dailyHourWrapper">
           <div className="dailyHour">
-            <div className="dailyHourLine"/>
+            <div className="dailyHourLine" />
           </div>
         </div>
       );
@@ -202,26 +201,17 @@ export default class Daily extends React.Component {
     if (Array.isArray(dayEvents) && dayEvents.length) {
       return dayEvents.map((event, index) => {
         return (
-          <Draggable draggableId="draggable-1" index={index}>
-            {
-              provided => (
-                <div
-                  {...provided.draggableProps}
-                  {...provided.dragHandleProps}
-                  ref={provided.innerRef}
-                  key={event.id}
-                  id={`dailyEvent-${event.id}-${event.date.getDate()}`}
-                  className="dayEvent"
-                >
-                  <Event
-                    color={event.color}
-                    title={event.title}
-                    onClick={() => this.onClickEvent(event.id)}
-                  />
-                </div>
-              )
-            }
-          </Draggable>
+          <div
+            key={event.id}
+            id={`dailyEvent-${event.id}-${event.date.getDate()}`}
+            className="dayEvent"
+          >
+            <Event
+              color={event.color}
+              title={event.title}
+              onClick={() => this.onClickEvent(event.id)}
+            />
+          </div>
         );
       });
     }
@@ -255,20 +245,10 @@ export default class Daily extends React.Component {
     return (
       <div id='dailyTimeLine' className="dailyTimeLineWrapper" onClick={this.onClickTimeLine}>
         <div className="dailyHourTextWrapper">{this.returnHours()}</div>
-        <Droppable droppableId="droppable-1">
-          {
-            provided => (
-              <div
-                {...provided.droppableProps}
-                ref={provided.innerRef}
-                className="dailyTimeLine"
-              >
-                <div>{this.returnEvents()}</div>
-                {this.returnHoursLine()}
-                {provided.placeholder}
-              </div>
-            )}
-        </Droppable>
+        <div className="dailyTimeLine">
+          <div>{this.returnEvents()}</div>
+          {this.returnHoursLine()}
+        </div>
       </div>
     );
   }

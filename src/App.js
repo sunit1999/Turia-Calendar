@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { DragDropContext } from "react-beautiful-dnd";
 
 import Calendar from './Calendar/Calender_component';
 import './App.css';
@@ -46,24 +45,11 @@ class App extends Component {
 
   state = events;
 
-  onDragEnd = res => {
-    // const { destination, source, draggableId } = res;
-    // if (!destination) return;
-
-    // if (
-    //   destination.droppableId === source.droppableId &&
-    //   destination.index === source.index
-    // ) return;
-    
-  }
-
   render() {
     return (
-      <DragDropContext onDragEnd={this.onDragEnd}>
         <div className="App">
           <Calendar events={events} />
         </div>
-      </DragDropContext>
     );
   }
 }
